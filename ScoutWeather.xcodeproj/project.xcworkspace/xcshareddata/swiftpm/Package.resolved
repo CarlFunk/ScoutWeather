@@ -1,0 +1,42 @@
+{
+  "originHash" : "708a5f37bc0b6a23b997b344873041f80da934398a1d11ccbb5b93cd97110c0a",
+  "pins" : [
+    {
+      "identity" : "ampledependency",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CarlFunk/AmpleDependency",
+      "state" : {
+        "revision" : "b7679f352b2dc1d52df9cea11a6a1bda91a13d20",
+        "version" : "0.2.1"
+      }
+    },
+    {
+      "identity" : "amplemock",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CarlFunk/AmpleMock",
+      "state" : {
+        "revision" : "7773be83ddbab524de0041227c880d4df2d65ce1",
+        "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "amplenavigation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CarlFunk/AmpleNavigation",
+      "state" : {
+        "revision" : "e5342c280a3c69c2c894122a3d4c90a68d036743",
+        "version" : "0.3.1"
+      }
+    },
+    {
+      "identity" : "nuke",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Nuke",
+      "state" : {
+        "revision" : "0ead44350d2737db384908569c012fe67c421e4d",
+        "version" : "12.8.0"
+      }
+    }
+  ],
+  "version" : 3
+}
