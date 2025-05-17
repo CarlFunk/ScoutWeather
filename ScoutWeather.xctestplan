@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "4150A036-9D84-4144-BE5D-9C87ACCE2836",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:ScoutWeather.xcodeproj",
+      "identifier" : "A88AC0352DD2D99F00B350BE",
+      "name" : "ScoutWeather"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/ScreenUI",
+        "identifier" : "WeatherUITests",
+        "name" : "WeatherUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
