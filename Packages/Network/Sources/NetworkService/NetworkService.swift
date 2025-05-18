@@ -30,7 +30,14 @@ open class NetworkService: NetworkServicing {
         do {
             let baseURL = try buildBaseURL(from: base)
             let request = request.buildRequest(baseURL: baseURL)
+            logRequest(request: request)
             return session.dataTaskPublisher(for: request)
+                .handleEvents(
+                    receiveOutput: { [weak self] (data, response) in
+                        guard let self else { return }
+                        self.logData(data: data, response: response)
+                    }
+                )
                 .tryMap { (data, response) -> Data in
                     guard let httpResponse = response as? HTTPURLResponse else {
                         throw NetworkError.invalidResponse
@@ -49,6 +56,31 @@ open class NetworkService: NetworkServicing {
             return Fail(error: NetworkError.invalidRequest)
                 .eraseToAnyPublisher()
         }
+    }
+    
+    open func logRequest(request: URLRequest) {
+        print("""
+        ----------
+        REQUEST:
+        URL: \(request.url ?? URL(string: "https://unknown.com")!)
+        Method: \(request.httpMethod ?? "")
+        Headers: \(request.allHTTPHeaderFields ?? [:])
+        Data: \(request.httpBody?.prettyPrinted() ?? "")
+        ----------
+        """)
+    }
+    
+    open func logData(data: Data, response: URLResponse) {
+        let httpResponse = response as? HTTPURLResponse
+        
+        print("""
+        ----------
+        RESPONSE:
+        URL: \(response.url ?? URL(string: "https://unknown.com")!)
+        Code: \(httpResponse?.statusCode ?? -1)
+        Data: \(data.prettyPrinted() ?? "")
+        ----------
+        """)
     }
     
     open func mapData(data: Data, httpResponse: HTTPURLResponse) throws -> Data {

@@ -40,7 +40,7 @@ public struct ForecastDay: Equatable, Hashable, Identifiable, Mockable {
         self.condition = condition
     }
     
-    public func dayOfWeekFormatted(timeZone: TimeZone = .current) -> String {
+    public func dayOfWeekFormatted(timeZone: TimeZone = .gmt) -> String {
         var format: Date.FormatStyle = .dateTime.weekday(.wide)
         format.timeZone = timeZone
         return date.formatted(format).capitalized

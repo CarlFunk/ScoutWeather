@@ -13,7 +13,7 @@ extension LocationForecastRowViewState {
     init(location: ForecastLocation, forecastDay: ForecastDay, settings: Settings) {
         self.init(
             id: forecastDay.id,
-            date: forecastDay.dayOfWeekFormatted(timeZone: location.timeZone),
+            date: forecastDay.dayOfWeekFormatted(),
             range: LocationForecastRangeViewState(from: forecastDay, settings: settings),
             conditionIcon: forecastDay.condition.icon,
             conditionText: forecastDay.condition.text)
