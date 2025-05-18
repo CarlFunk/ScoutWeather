@@ -18,20 +18,22 @@ public struct UserLocationForecastScreen: View {
     
     public var body: some View {
         VStack {
-            switch viewModel.viewState {
-            case .error:
-                Text("ERROR")
-            case .loading:
-                ProgressView()
-            case .defaultLocationForecast(let location, let coordinator), .locationForecast(let location, let coordinator):
-                LocationForecastView(
-                    viewModel: LocationForecastViewModel(
-                        location: location,
-                        coordinator: coordinator)
-                )
-                .id(location)
+            if let bannerViewState = viewModel.viewState.bannerViewState {
+                BannerView(viewState: bannerViewState) { action in
+                    switch action {
+                    case .dismiss:
+                        viewModel.dismissBanner()
+                    }
+                }
+                .padding()
+                .transition(.move(edge: .top))
             }
+            
+            LocationForecastView(
+                viewModel: viewModel.locationViewModel
+            )
         }
+        .animation(.bouncy, value: viewModel.viewState.bannerViewState != nil)
         .onAppear {
             viewModel.viewAppeared()
         }

@@ -10,7 +10,7 @@ import SharedUI
 import SwiftUI
 
 public struct LocationForecastView: View {
-    @State var viewModel: LocationForecastViewModel
+    var viewModel: LocationForecastViewModel
     
     public init(viewModel: LocationForecastViewModel) {
         self.viewModel = viewModel

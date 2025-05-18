@@ -19,8 +19,6 @@ struct AppScreenView: View {
         switch navigation.screen {
         case .userForecast:
             UserLocationForecastScreen(viewModel: UserLocationForecastViewModel(coordinator: coordinator))
-        case .forecast(let location):
-            LocationForecastView(viewModel: LocationForecastViewModel(location: location, coordinator: coordinator))
         case .forecastDetails(let location, let forecastDay):
             LocationForecastDetailsScreen(viewModel: LocationForecastDetailsViewModel(location: location, forecastDay: forecastDay, coordinator: coordinator))
         }

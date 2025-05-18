@@ -10,9 +10,27 @@ import AmpleNavigation
 import SharedUI
 import WeatherDomain
 
-enum UserLocationForecastViewState {
-    case defaultLocationForecast(LocationQuery, NavigationCoordinator<AppScreen>)
-    case error
-    case loading
-    case locationForecast(LocationQuery, NavigationCoordinator<AppScreen>)
+struct UserLocationForecastViewState {
+    let isLoading: Bool
+    let bannerViewState: BannerViewState?
+    
+    init(
+        isLoading: Bool,
+        bannerViewState: BannerViewState? = nil
+    ) {
+        self.isLoading = isLoading
+        self.bannerViewState = bannerViewState
+    }
+    
+    func updated(bannerViewState: BannerViewState?) -> UserLocationForecastViewState{
+        UserLocationForecastViewState(
+            isLoading: isLoading,
+            bannerViewState: bannerViewState)
+    }
+    
+    func updated(isLoading: Bool) -> UserLocationForecastViewState {
+        UserLocationForecastViewState(
+            isLoading: isLoading,
+            bannerViewState: bannerViewState)
+    }
 }

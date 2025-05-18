@@ -12,13 +12,11 @@ import WeatherDomain
 
 public enum AppScreen: NavigationScreen {
     case userForecast
-    case forecast(location: LocationQuery)
     case forecastDetails(location: ForecastLocation, forecastDay: ForecastDay)
     
     public var id: String {
         switch self {
         case .userForecast:     "user_forecast"
-        case .forecast:         "forecast"
         case .forecastDetails:  "forecast_details"
         }
     }

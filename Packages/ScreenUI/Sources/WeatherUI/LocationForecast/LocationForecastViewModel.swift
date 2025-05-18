@@ -44,8 +44,15 @@ import WeatherDomain
     
     func viewAppeared() {
         if viewState.isLoading {
-            initialLoad()
+            loadData()
         }
+    }
+    
+    func updated(location: LocationQuery) {
+        self.location = location
+        
+        viewState = viewState.updated(isLoading: true)
+        loadData()
     }
     
     func viewForecast(id: String) {
@@ -70,11 +77,9 @@ import WeatherDomain
         viewState = viewState.updated(alertViewState: nil)
     }
     
-    private func initialLoad() {
-        loadData()
-    }
-    
     private func loadData() {
+        guard !location.id.isEmpty else { return }
+        
         loadDataCancellable = Publishers.CombineLatest(
             weatherRepository.getForecast(request: ForecastRequest(location: location)),
             settingsRepository.subscribeSettings()

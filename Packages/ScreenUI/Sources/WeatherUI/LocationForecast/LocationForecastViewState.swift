@@ -30,6 +30,16 @@ struct LocationForecastViewState {
         self.alertViewState = alertViewState
     }
     
+    func updated(isLoading: Bool) -> LocationForecastViewState {
+        LocationForecastViewState(
+            isLoading: isLoading,
+            header: header,
+            multiDayForecast: multiDayForecast,
+            temperatureSetting: temperatureSetting,
+            alertViewState: alertViewState
+        )
+    }
+    
     func updated(alertViewState: AlertViewState?) -> LocationForecastViewState {
         LocationForecastViewState(
             isLoading: isLoading,
