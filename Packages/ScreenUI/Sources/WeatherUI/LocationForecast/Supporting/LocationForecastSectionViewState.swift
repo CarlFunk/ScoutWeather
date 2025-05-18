@@ -33,7 +33,7 @@ extension LocationForecastSectionViewState {
     init(from domainModel: Forecast, settings: Settings) {
         self.init(
             rows: domainModel.days.map { forecastDay in
-                LocationForecastRowViewState(from: forecastDay, settings: settings)
+                LocationForecastRowViewState(location: domainModel.location, forecastDay: forecastDay, settings: settings)
             }
         )
     }

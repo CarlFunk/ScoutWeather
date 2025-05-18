@@ -18,6 +18,13 @@
   "testTargets" : [
     {
       "target" : {
+        "containerPath" : "container:Packages\/Data",
+        "identifier" : "WeatherDataTests",
+        "name" : "WeatherDataTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:Packages\/ScreenUI",
         "identifier" : "WeatherUITests",
         "name" : "WeatherUITests"

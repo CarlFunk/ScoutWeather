@@ -14,18 +14,22 @@ open class NetworkService: NetworkServicing {
     public let base: String
     public let session: URLSession
     
+    public let authDelegate: (any NetworkAuthDelegate)?
+    
     public init(
         base: String,
-        session: URLSession = .shared
+        session: URLSession = .shared,
+        authDelegate: (any NetworkAuthDelegate)? = nil
     ) {
         self.base = base
         self.session = session
+        self.authDelegate = authDelegate
     }
     
     public func request(with request: any NetworkRequestable) -> AnyPublisher<Data, NetworkError> {
         do {
             let baseURL = try buildBaseURL(from: base)
-            let request = try request.buildRequest(baseURL: baseURL)
+            let request = request.buildRequest(baseURL: baseURL)
             return session.dataTaskPublisher(for: request)
                 .tryMap { (data, response) -> Data in
                     guard let httpResponse = response as? HTTPURLResponse else {
@@ -62,7 +66,7 @@ open class NetworkService: NetworkServicing {
         }
     }
     
-    private func buildBaseURL(from base: String) throws -> URL {
+    open func buildBaseURL(from base: String) throws -> URL {
         guard let baseURL = URL(string: base) else {
             throw NetworkError.malformedBaseURL
         }

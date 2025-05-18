@@ -31,7 +31,7 @@ struct LocationForecastDetailsViewState {
 extension LocationForecastDetailsViewState {
     init(location: ForecastLocation, forecastDay: ForecastDay, settings: Settings) {
         self.init(
-            title: forecastDay.dayOfWeekFormatted(),
+            title: forecastDay.dayOfWeekFormatted(timeZone: location.timeZone),
             header: LocationForecastHeaderViewState(from: location, condition: forecastDay.condition),
             range: LocationForecastRangeViewState(from: forecastDay, settings: settings),
             stats: LocationForecastStatsViewState(from: forecastDay)

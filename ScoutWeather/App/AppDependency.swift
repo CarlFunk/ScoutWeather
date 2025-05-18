@@ -23,8 +23,14 @@ final class AppDependency {
             LiveLocationRepository()
         }
         
+        DependencyContainer.shared.register(type: NetworkAuthDelegate.self) {
+            AppNetworkAuthDelegate()
+        }
+        
         DependencyContainer.shared.register(type: NetworkServicing.self, name: "Weather") {
-            WeatherNetworkService()
+            let authDelegate = try! DependencyContainer.shared.resolve(type: NetworkAuthDelegate.self, lifetime: .singleton)
+            
+            return WeatherNetworkService(authDelegate: authDelegate)
         }
         
         DependencyContainer.shared.register(type: SettingsRepository.self) {

@@ -39,6 +39,12 @@ let package = Package(
                 .product(name: "AmpleDependency", package: "AmpleDependency"),
                 .product(name: "Domain", package: "Domain"),
                 .product(name: "NetworkCore", package: "Network")
+            ]),
+        .testTarget(
+            name: "WeatherDataTests",
+            dependencies: [
+                .product(name: "Domain", package: "Domain"),
+                .target(name: "WeatherData")
             ])
     ]
 )

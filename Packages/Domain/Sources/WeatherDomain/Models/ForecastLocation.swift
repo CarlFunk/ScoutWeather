@@ -14,6 +14,7 @@ public struct ForecastLocation: Equatable, Hashable, Identifiable, Mockable {
     public let name: String
     public let region: String
     public let country: String
+    public let timeZone: TimeZone
     public let query: LocationQuery
     public let coordinate: GeographicCoordinate
     
@@ -21,12 +22,14 @@ public struct ForecastLocation: Equatable, Hashable, Identifiable, Mockable {
         name: String,
         region: String,
         country: String,
+        timeZone: TimeZone,
         query: LocationQuery,
         coordinate: GeographicCoordinate
     ) {
         self.name = name
         self.region = region
         self.country = country
+        self.timeZone = timeZone
         self.query = query
         self.coordinate = coordinate
     }
@@ -40,6 +43,7 @@ public struct ForecastLocation: Equatable, Hashable, Identifiable, Mockable {
             name: values.get(\.name, defaultValue: "Dallas"),
             region: values.get(\.region, defaultValue: "Texas"),
             country: values.get(\.country, defaultValue: "United States of America"),
+            timeZone: values.get(\.timeZone, defaultValue: .current),
             query: values.get(\.query, defaultValue: .name("dallas-texas-united-states-of-america")),
             coordinate: GeographicCoordinate(
                 latitude: values.get(\.coordinate.latitude, defaultValue: GeographicCoordinate.mock().latitude),

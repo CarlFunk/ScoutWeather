@@ -36,6 +36,7 @@ public struct Forecast: Mockable {
                 name: values.get(\.location.name, defaultValue: ForecastLocation.mock().name),
                 region: values.get(\.location.region, defaultValue: ForecastLocation.mock().region),
                 country: values.get(\.location.country, defaultValue: ForecastLocation.mock().country),
+                timeZone: values.get(\.location.timeZone, defaultValue: ForecastLocation.mock().timeZone),
                 query: values.get(\.location.query, defaultValue: ForecastLocation.mock().query),
                 coordinate: GeographicCoordinate(
                     latitude: values.get(\.location.coordinate.latitude, defaultValue: GeographicCoordinate.mock().latitude),

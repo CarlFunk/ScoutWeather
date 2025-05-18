@@ -17,7 +17,7 @@ public final class LiveWeatherRepository: WeatherRepository {
     
     public init() { }
     
-    public func getForecast(request: ForecastRequest, ignoreCache: Bool) -> AnyPublisher<Forecast, any Error> {
+    public func getForecast(request: ForecastRequest) -> AnyPublisher<Forecast, any Error> {
         networkService.request(with: request.networkRequest)
             .decode(type: ForecastNetworkResponse.self, decoder: JSONDecoder())
             .map { networkModel in

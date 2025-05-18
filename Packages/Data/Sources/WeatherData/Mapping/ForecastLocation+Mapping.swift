@@ -7,6 +7,7 @@
 //
 
 import CommonDomain
+import Foundation
 import WeatherDomain
 
 extension ForecastLocation {
@@ -15,6 +16,7 @@ extension ForecastLocation {
             name: networkModel.name,
             region: networkModel.region,
             country: networkModel.country,
+            timeZone: TimeZone(identifier: networkModel.timeZoneName) ?? .current,
             query: request.location,
             coordinate: GeographicCoordinate(
                 latitude: networkModel.latitude,

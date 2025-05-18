@@ -10,5 +10,7 @@ import Combine
 import Foundation
 
 public protocol NetworkServicing {
+    var authDelegate: NetworkAuthDelegate? { get }
+    
     func request(with request: NetworkRequestable) -> AnyPublisher<Data, NetworkError>
 }

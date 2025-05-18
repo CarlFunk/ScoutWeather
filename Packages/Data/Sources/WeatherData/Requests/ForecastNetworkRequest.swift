@@ -22,12 +22,11 @@ final class ForecastNetworkRequest: NetworkRequestable {
         self.days = days
     }
     
-    func buildURL(baseURL: URL) throws -> URL {
+    func buildURL(baseURL: URL) -> URL {
         return baseURL
             .appending(path: "v1")
             .appending(path: "forecast.json")
             .appending(queryItems: [
-                URLQueryItem(name: "key", value: "REPLACE_ME"),
                 URLQueryItem(name: "q", value: location),
                 URLQueryItem(name: "days", value: String(days))
             ])

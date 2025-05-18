@@ -30,12 +30,12 @@ struct LocationForecastRowViewState: Identifiable, Mockable {
 }
 
 extension LocationForecastRowViewState {
-    init(from domainModel: ForecastDay, settings: Settings) {
+    init(location: ForecastLocation, forecastDay: ForecastDay, settings: Settings) {
         self.init(
-            id: domainModel.id,
-            date: domainModel.dayOfWeekFormatted(),
-            range: LocationForecastRangeViewState(from: domainModel, settings: settings),
-            conditionIcon: domainModel.condition.icon,
-            conditionText: domainModel.condition.text)
+            id: forecastDay.id,
+            date: forecastDay.dayOfWeekFormatted(timeZone: location.timeZone),
+            range: LocationForecastRangeViewState(from: forecastDay, settings: settings),
+            conditionIcon: forecastDay.condition.icon,
+            conditionText: forecastDay.condition.text)
     }
 }

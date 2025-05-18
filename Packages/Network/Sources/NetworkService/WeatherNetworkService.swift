@@ -10,8 +10,11 @@ import Foundation
 import NetworkCore
 
 public final class WeatherNetworkService: NetworkService {
-    public init(session: URLSession = .shared) {
-        super.init(base: "https://api.weatherapi.com", session: session)
+    public init(
+        session: URLSession = .shared,
+        authDelegate: (any NetworkAuthDelegate)? = nil
+    ) {
+        super.init(base: "https://api.weatherapi.com", session: session, authDelegate: authDelegate)
     }
     
     public override func mapData(data: Data, httpResponse: HTTPURLResponse) throws -> Data {
@@ -30,6 +33,19 @@ public final class WeatherNetworkService: NetworkService {
         default:
             throw NetworkError.invalidResponse
         }
+    }
+    
+    public override func buildBaseURL(from base: String) throws -> URL {
+        var baseURL = try super.buildBaseURL(from: base)
+        
+        if let key = authDelegate?.authorizationToken() {
+            baseURL = baseURL.appending(
+                queryItems: [
+                    URLQueryItem(name: "key", value: key)
+                ])
+        }
+        
+        return baseURL
     }
     
     private struct ErrorResponse: Codable {

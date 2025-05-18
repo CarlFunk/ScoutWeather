@@ -14,7 +14,7 @@ public final class MockWeatherRepository: WeatherRepository {
     
     public init() { }
     
-    public func getForecast(request: ForecastRequest, ignoreCache: Bool) -> AnyPublisher<Forecast, any Error> {
+    public func getForecast(request: ForecastRequest) -> AnyPublisher<Forecast, any Error> {
         Just<Forecast>(
             Forecast.mock(
                 values: .include(

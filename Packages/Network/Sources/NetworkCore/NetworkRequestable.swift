@@ -9,15 +9,20 @@
 import Foundation
 
 public protocol NetworkRequestable {
+    var data: Data? { get }
     var method: NetworkMethod { get }
     var headers: [String: String] { get }
     var query: [String: String] { get }
     
-    func buildURL(baseURL: URL) throws -> URL
-    func buildRequest(baseURL: URL) throws -> URLRequest
+    func buildURL(baseURL: URL) -> URL
+    func buildRequest(baseURL: URL) -> URLRequest
 }
 
 public extension NetworkRequestable {
+    var data: Data? {
+        nil
+    }
+    
     var headers: [String: String] {
         [:]
     }
@@ -26,10 +31,11 @@ public extension NetworkRequestable {
         [:]
     }
     
-    func buildRequest(baseURL: URL) throws -> URLRequest {
-        var request = URLRequest(url: try buildURL(baseURL: baseURL))
+    func buildRequest(baseURL: URL) -> URLRequest {
+        var request = URLRequest(url: buildURL(baseURL: baseURL))
         request.httpMethod = method.value
         request.allHTTPHeaderFields = headers
+        request.httpBody = data
         return request
     }
 }
