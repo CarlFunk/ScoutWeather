@@ -1,5 +1,5 @@
 //
-//  LocationForecastDetailsView.swift
+//  LocationForecastDetailsScreen.swift
 //  WeatherUI
 //
 //  Created by Carl Funk on 5/12/25.
@@ -9,7 +9,7 @@
 import AmpleMock
 import SwiftUI
 
-public struct LocationForecastDetailsView: View {
+public struct LocationForecastDetailsScreen: View {
     @State var viewModel: LocationForecastDetailsViewModel
     
     public init(viewModel: LocationForecastDetailsViewModel) {
@@ -35,5 +35,5 @@ public struct LocationForecastDetailsView: View {
 }
 
 #Preview {
-    LocationForecastDetailsView(viewModel: LocationForecastDetailsViewModel(location: .mock(), forecastDay: .mock()))
+    LocationForecastDetailsScreen(viewModel: LocationForecastDetailsViewModel(location: .mock(), forecastDay: .mock()))
 }
