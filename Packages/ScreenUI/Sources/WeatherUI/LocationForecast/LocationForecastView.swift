@@ -44,6 +44,14 @@ public struct LocationForecastView: View {
             }
             .padding()
         }
+        .redacted(reason: viewModel.viewState.isLoading ? .placeholder : [])
+        .alert(viewState: Binding(get: {
+            viewModel.viewState.alertViewState
+        }, set: { newValue in
+            if newValue == nil {
+                viewModel.dismissAlert()
+            }
+        }))
         .onAppear {
             viewModel.viewAppeared()
         }

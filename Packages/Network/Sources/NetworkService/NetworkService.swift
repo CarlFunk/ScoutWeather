@@ -45,8 +45,11 @@ open class NetworkService: NetworkServicing {
                     
                     return try self.mapData(data: data, httpResponse: httpResponse)
                 }
-                .mapError { sessionError -> NetworkError in
-                    NetworkError.connectivity
+                .mapError { error -> NetworkError in
+                    if let networkError = error as? NetworkError {
+                        return networkError
+                    }
+                    return NetworkError.connectivity
                 }
                 .eraseToAnyPublisher()
         } catch let networkError as NetworkError {

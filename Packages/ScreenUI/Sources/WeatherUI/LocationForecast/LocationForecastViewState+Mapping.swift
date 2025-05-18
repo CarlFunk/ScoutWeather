@@ -10,8 +10,9 @@ import SettingsDomain
 import WeatherDomain
 
 extension LocationForecastViewState {
-    init(forecast: Forecast, settings: Settings) {
+    init(forecast: Forecast, settings: Settings, isLoading: Bool) {
         self.init(
+            isLoading: isLoading,
             header: LocationForecastHeaderViewState(from: forecast.location, condition: forecast.currentCondition),
             multiDayForecast: LocationForecastSectionViewState(from: forecast, settings: settings),
             temperatureSetting: OptionMenuViewState(

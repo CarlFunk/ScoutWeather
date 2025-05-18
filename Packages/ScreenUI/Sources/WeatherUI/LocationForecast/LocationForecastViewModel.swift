@@ -39,11 +39,13 @@ import WeatherDomain
         self.forecast = forecast
         self.settings = settings
         self.coordinator = coordinator
-        self.viewState = LocationForecastViewState(forecast: forecast, settings: settings)
+        self.viewState = LocationForecastViewState(forecast: forecast, settings: settings, isLoading: true)
     }
     
     func viewAppeared() {
-        initialLoad()
+        if viewState.isLoading {
+            initialLoad()
+        }
     }
     
     func viewForecast(id: String) {
@@ -64,6 +66,10 @@ import WeatherDomain
         }
     }
     
+    func dismissAlert() {
+        viewState = viewState.updated(alertViewState: nil)
+    }
+    
     private func initialLoad() {
         loadData()
     }
@@ -75,10 +81,19 @@ import WeatherDomain
                 .setFailureType(to: Error.self)
         )
         .receive(on: DispatchQueue.main)
-        .sink { completion in
-            if case .failure(let error) = completion {
-                print(error)
+        .sink { [weak self] completion in
+            guard let self else { return }
+            guard case .failure(let error) = completion else {
+                return
             }
+            
+            self.viewState = self.viewState.updated(
+                alertViewState: .error(
+                    error,
+                    retry: { [weak self] in
+                        guard let self else { return }
+                        self.loadData()
+                    }))
         } receiveValue: { [weak self] forecast, settings in
             guard let self else { return }
             self.forecast = forecast
@@ -88,6 +103,6 @@ import WeatherDomain
     }
     
     private func update(with forecast: Forecast, and settings: Settings) {
-        viewState = LocationForecastViewState(forecast: forecast, settings: settings)
+        viewState = LocationForecastViewState(forecast: forecast, settings: settings, isLoading: false)
     }
 }
