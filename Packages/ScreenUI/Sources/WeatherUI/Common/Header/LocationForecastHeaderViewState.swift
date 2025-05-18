@@ -8,7 +8,6 @@
 
 import AmpleMock
 import Foundation
-import WeatherDomain
 
 struct LocationForecastHeaderViewState: Mockable {
     let name: String
@@ -22,17 +21,6 @@ struct LocationForecastHeaderViewState: Mockable {
             region: values.get(\.region, defaultValue: "Texas"),
             condition: values.get(\.condition, defaultValue: "Sunny"),
             conditionIcon: values.get(\.conditionIcon, defaultValue: URL.mockImage)
-        )
-    }
-}
-
-extension LocationForecastHeaderViewState {
-    init(from location: ForecastLocation, condition: ForecastCondition) {
-        self.init(
-            name: location.name,
-            region: location.region,
-            condition: condition.text,
-            conditionIcon: condition.icon
         )
     }
 }

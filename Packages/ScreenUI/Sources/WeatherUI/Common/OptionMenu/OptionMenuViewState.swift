@@ -8,7 +8,6 @@
 
 import AmpleMock
 import Foundation
-import SettingsDomain
 
 struct OptionMenuViewState: Mockable {
     struct Option: Equatable, Identifiable, Mockable {
@@ -31,13 +30,5 @@ struct OptionMenuViewState: Mockable {
             options: values.get(\.options, defaultValue: [.mock(), .mock(), .mock()]),
             selected: values.get(\.selected, defaultValue: .mock())
         )
-    }
-}
-
-extension OptionMenuViewState.Option {
-    init(from domainModel: TemperatureSetting) {
-        self.init(
-            id: domainModel.id,
-            title: domainModel.displayTitle)
     }
 }

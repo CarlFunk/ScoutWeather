@@ -6,9 +6,6 @@
 //  Copyright © 2025 Carl Funk. All rights reserved.
 //
 
-import SettingsDomain
-import WeatherDomain
-
 struct LocationForecastDetailsViewState {
     let title: String
     let header: LocationForecastHeaderViewState
@@ -25,16 +22,5 @@ struct LocationForecastDetailsViewState {
         self.header = header
         self.range = range
         self.stats = stats
-    }
-}
-
-extension LocationForecastDetailsViewState {
-    init(location: ForecastLocation, forecastDay: ForecastDay, settings: Settings) {
-        self.init(
-            title: forecastDay.dayOfWeekFormatted(timeZone: location.timeZone),
-            header: LocationForecastHeaderViewState(from: location, condition: forecastDay.condition),
-            range: LocationForecastRangeViewState(from: forecastDay, settings: settings),
-            stats: LocationForecastStatsViewState(from: forecastDay)
-        )
     }
 }

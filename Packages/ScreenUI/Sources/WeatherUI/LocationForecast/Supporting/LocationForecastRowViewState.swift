@@ -8,8 +8,6 @@
 
 import AmpleMock
 import Foundation
-import SettingsDomain
-import WeatherDomain
 
 struct LocationForecastRowViewState: Identifiable, Mockable {
     let id: String
@@ -26,16 +24,5 @@ struct LocationForecastRowViewState: Identifiable, Mockable {
             conditionIcon: values.get(\.conditionIcon, defaultValue: URL.mockImage),
             conditionText: values.get(\.conditionText, defaultValue: "Patchy rain nearby")
         )
-    }
-}
-
-extension LocationForecastRowViewState {
-    init(location: ForecastLocation, forecastDay: ForecastDay, settings: Settings) {
-        self.init(
-            id: forecastDay.id,
-            date: forecastDay.dayOfWeekFormatted(timeZone: location.timeZone),
-            range: LocationForecastRangeViewState(from: forecastDay, settings: settings),
-            conditionIcon: forecastDay.condition.icon,
-            conditionText: forecastDay.condition.text)
     }
 }

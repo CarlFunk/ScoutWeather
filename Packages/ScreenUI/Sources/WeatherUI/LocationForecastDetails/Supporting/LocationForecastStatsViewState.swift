@@ -8,7 +8,6 @@
 
 import AmpleMock
 import Foundation
-import WeatherDomain
 
 struct LocationForecastStatsViewState: Mockable {
     struct ItemViewState: Identifiable, Mockable {
@@ -35,29 +34,5 @@ struct LocationForecastStatsViewState: Mockable {
                 .mock(),
                 .mock()
             ]))
-    }
-}
-
-extension LocationForecastStatsViewState {
-    init(from domainModel: ForecastDay) {
-        self.init(
-            items: [
-                ItemViewState(
-                    id: "humidity",
-                    title: "Humidity",
-                    value: domainModel.avgHumidity.formatted(.percent),
-                    systemImage: "drop"),
-                ItemViewState(
-                    id: "rain_chance",
-                    title: "Rain",
-                    value: domainModel.rainPossibility.formatted(.percent),
-                    systemImage: "cloud.rain"),
-                ItemViewState(
-                    id: "snow_chance",
-                    title: "Snow",
-                    value: domainModel.snowPossibility.formatted(.percent),
-                    systemImage: "cloud.snow")
-            ]
-        )
     }
 }

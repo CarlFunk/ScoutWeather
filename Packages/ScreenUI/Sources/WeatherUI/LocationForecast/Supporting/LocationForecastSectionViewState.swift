@@ -8,8 +8,6 @@
 
 import AmpleMock
 import Foundation
-import SettingsDomain
-import WeatherDomain
 
 struct LocationForecastSectionViewState: Mockable {
     let rows: [LocationForecastRowViewState]
@@ -25,16 +23,6 @@ struct LocationForecastSectionViewState: Mockable {
                 .mock(values: .include(\.date, value: "Saturday")),
                 .mock(values: .include(\.date, value: "Sunday"))
             ]
-        )
-    }
-}
-
-extension LocationForecastSectionViewState {
-    init(from domainModel: Forecast, settings: Settings) {
-        self.init(
-            rows: domainModel.days.map { forecastDay in
-                LocationForecastRowViewState(location: domainModel.location, forecastDay: forecastDay, settings: settings)
-            }
         )
     }
 }

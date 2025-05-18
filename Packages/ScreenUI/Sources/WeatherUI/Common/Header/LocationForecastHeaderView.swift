@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import WeatherDomain
 
 struct LocationForecastHeaderView: View {
     let viewState: LocationForecastHeaderViewState

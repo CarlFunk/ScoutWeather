@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import SettingsDomain
-import WeatherDomain
 
 struct LocationForecastViewState {
     let header: LocationForecastHeaderViewState
@@ -23,20 +21,5 @@ struct LocationForecastViewState {
         self.header = header
         self.multiDayForecast = multiDayForecast
         self.temperatureSetting = temperatureSetting
-    }
-}
-
-extension LocationForecastViewState {
-    init(forecast: Forecast, settings: Settings) {
-        self.init(
-            header: LocationForecastHeaderViewState(from: forecast.location, condition: forecast.currentCondition),
-            multiDayForecast: LocationForecastSectionViewState(from: forecast, settings: settings),
-            temperatureSetting: OptionMenuViewState(
-                options: [
-                    OptionMenuViewState.Option(from: TemperatureSetting.celsius),
-                    OptionMenuViewState.Option(from: TemperatureSetting.fahrenheit)
-                ],
-                selected: OptionMenuViewState.Option(from: settings.temperature))
-        )
     }
 }
